@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "60779607090",
+    "project_id": "ocreativeland",
+    "storage_bucket": "ocreativeland.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:60779607090:android:64f65af4375d8cd052782b",
+        "android_client_info": {
+          "package_name": "com.ocreative.ocreative_land"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "60779607090-ts0fog2sv101q70cc4omov9igj4nccsd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ocreative.ocreative_land",
+            "certificate_hash": "81b86bbc8e33ec9587be8d4dc687439a4359023d"
+          }
+        },
+        {
+          "client_id": "60779607090-utb22ots4sdoj3an35lh9smr4b45p41q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDnKTEeUh45kw0CjMl0rNGyLSZff3SXVWA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "60779607090-utb22ots4sdoj3an35lh9smr4b45p41q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
