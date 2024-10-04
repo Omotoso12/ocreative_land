@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ocreative_land/widgets/string.dart';
-import '../../controller/auth_controller.dart';
+import '../../auth_controls/auth_controller.dart';
 import '../../widgets/form_widgets.dart';
 
 class ForgetPassord extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ocreative_land/controller/auth_controller.dart';
+import 'package:ocreative_land/auth_controls/auth_controller.dart';
 import 'package:ocreative_land/widgets/string.dart';
 import 'package:ocreative_land/widgets/form_widgets.dart';
 

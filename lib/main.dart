@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'my_app.dart';
 
 void main() async {
@@ -11,5 +12,8 @@ void main() async {
         messagingSenderId: '60779607090',
         projectId: 'ocreativeland'),
   );
-  runApp(const MyApp());
+  runApp(const ProviderScope(
+    child: MyApp()
+  ) 
+  );
 }

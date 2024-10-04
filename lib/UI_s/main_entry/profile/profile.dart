@@ -4,7 +4,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ocreative_land/UI_s/main_entry/profile/pic_uploader.dart';
 import 'package:ocreative_land/UI_s/main_entry/profile/settings.dart';
-import 'package:ocreative_land/controller/storage_controller.dart';
+import 'package:ocreative_land/auth_controls/storage_controller.dart';
 import 'package:shimmer/shimmer.dart';
 
 class ProfilePage extends StatefulWidget {
