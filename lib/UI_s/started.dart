@@ -1,7 +1,7 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:ocreative_land/widgets/static_color.dart';
-import 'authentication/login.dart';
+import 'authentication/sign_in.dart';
 
 class Started extends StatefulWidget {
   const Started({super.key});
@@ -78,7 +78,7 @@ class _StartedState extends State<Started> {
                     onPressed: () {
                       Navigator.push(context,
                           MaterialPageRoute(builder: (context) {
-                        return const Login();
+                        return const SignIn();
                       }));
                     },
                     style: ElevatedButton.styleFrom(

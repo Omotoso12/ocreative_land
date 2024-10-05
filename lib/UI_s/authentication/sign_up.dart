@@ -3,7 +3,7 @@ import 'package:ocreative_land/auth_controls/auth_controller.dart';
 import 'package:ocreative_land/widgets/string.dart';
 import 'package:ocreative_land/widgets/form_widgets.dart';
 
-import 'login.dart';
+import 'sign_in.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
@@ -200,7 +200,7 @@ class _SignUpState extends State<SignUp> {
                   onPressed: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return const Login();
+                      return const SignIn();
                     }));
                   },
                   style: ElevatedButton.styleFrom(

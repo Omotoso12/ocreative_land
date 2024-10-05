@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ocreative_land/UI_s/authentication/sign_up.dart';
 import 'package:ocreative_land/auth_controls/auth_controller.dart';
 import 'package:ocreative_land/widgets/string.dart';
 import 'package:ocreative_land/widgets/form_widgets.dart';
 
+import '../../auth_controls/signin/signin_controller.dart';
 import 'forget_pass.dart';
 
-class Login extends StatefulWidget {
-  const Login({super.key});
+class SignIn extends ConsumerStatefulWidget {
+  const SignIn({super.key});
 
   @override
-  State<Login> createState() => _LoginState();
+  ConsumerState<SignIn> createState() => _SignInState();
 }
 
-class _LoginState extends State<Login> {
+class _SignInState extends ConsumerState<SignIn> {
   /* variables needed
   formkey
   controllers
@@ -117,7 +119,7 @@ class _LoginState extends State<Login> {
                     ),
 
                     // sign in button..........................................................................//
-                    // (authController.isLoading)
+                    // ( ref.watch(signInProvider).status)
                     //     ? const Center(
                     //         child: CircularProgressIndicator.adaptive())
                     //     :
@@ -142,7 +144,7 @@ class _LoginState extends State<Login> {
                                 const Color.fromARGB(225, 89, 142, 81),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
-                        child: (!authController.isLoading)
+                        child: (!ref.watch(signInProvider).status)
                             ? const Text(
                                 'Sign In',
                                 style: TextStyle(
