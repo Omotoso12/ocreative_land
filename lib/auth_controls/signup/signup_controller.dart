@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:equatable/equatable.dart';
 import '../../../../repository/auth_repo_provider.dart';
 import 'package:authentication_repository/authentication_repository.dart';
+
+import '../../UI_s/elements/snack_pop.dart';
 
 part 'signup_state.dart';
 
@@ -14,7 +17,7 @@ class SignUpController extends StateNotifier<SignUpState> {
   final AuthenticationRepository _authenticationRepository;
   SignUpController(this._authenticationRepository) : super(const SignUpState());
 
-  void signUpWithEmailAndPassword() async {
+  void signUpWithEmailAndPassword({required String email, required String password, required BuildContext context}) async {
     state = state.copyWith(status: true);
     try {
       await _authenticationRepository.signUpWithEmailAndPassword(
@@ -26,6 +29,9 @@ class SignUpController extends StateNotifier<SignUpState> {
     } on SignUpWithEmailAndPasswordFailure catch (e) {
       state = state.copyWith(
           status: false, errorMessage: e.code);
+       final snackBar = snackPop(e.code,);
+        // ignore: use_build_context_synchronously
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
     }
   }
 }

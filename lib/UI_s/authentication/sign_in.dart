@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ocreative_land/UI_s/authentication/sign_up.dart';
-import 'package:ocreative_land/auth_controls/auth_controller.dart';
+import 'package:ocreative_land/auth_controls/google_signin/google_signin_controller.dart';
 import 'package:ocreative_land/widgets/string.dart';
 import 'package:ocreative_land/widgets/form_widgets.dart';
 
@@ -37,12 +37,15 @@ class _SignInState extends ConsumerState<SignIn> {
   // instamt initialization //
   @override
   void initState() {
+    ref.read(signInProvider.notifier);
+    ref.read(googleSignInProvider.notifier);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final authController = AuthController();
+    final signInController = ref.read(signInProvider.notifier);
+    final gooleSignIn = ref.read(googleSignInProvider.notifier);
     return Scaffold(
         body: SafeArea(
             child: Center(
@@ -117,24 +120,18 @@ class _SignInState extends ConsumerState<SignIn> {
                         ],
                       ),
                     ),
-
-                    // sign in button..........................................................................//
-                    // ( ref.watch(signInProvider).status)
-                    //     ? const Center(
-                    //         child: CircularProgressIndicator.adaptive())
-                    //     :
+                    // sign in button...................................................................
                     Padding(
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       child: ElevatedButton(
                         onPressed: () {
+
                           if (_formkey.currentState!.validate()) {
-                            setState(() {
-                              authController.isLoading = true;
-                            });
-                            authController.login(
+                            signInController.signInWithEmailAndPassword(
                                 email: _emailController.text.trim(),
                                 password: _passwordController.text.trim(),
-                                context: context);
+                                context: context
+                            );
                           }
                         },
                         style: ElevatedButton.styleFrom(
@@ -178,7 +175,7 @@ class _SignInState extends ConsumerState<SignIn> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      authController.signInWithGoogle(context: context);
+                      gooleSignIn.signInWithGoogle();
                     },
                     child: SizedBox(
                         height: MediaQuery.sizeOf(context).height * 0.03,

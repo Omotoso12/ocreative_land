@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ocreative_land/auth_controls/auth_controller.dart';
 import 'package:ocreative_land/widgets/string.dart';
 import 'package:ocreative_land/widgets/form_widgets.dart';
 
+import '../../auth_controls/google_signin/google_signin_controller.dart';
+import '../../auth_controls/signup/signup_controller.dart';
 import 'sign_in.dart';
 
-class SignUp extends StatefulWidget {
+class SignUp extends ConsumerStatefulWidget {
   const SignUp({super.key});
 
   @override
-  State<SignUp> createState() => _SignUpState();
+  ConsumerState<SignUp> createState() => _SignUpState();
 }
 
-class _SignUpState extends State<SignUp> {
+class _SignUpState extends ConsumerState<SignUp> {
   /* variables needed
   formkey
   controllers
@@ -37,12 +40,16 @@ class _SignUpState extends State<SignUp> {
   // instamt initialization //
   @override
   void initState() {
+    ref.read(signUpProvider.notifier);
+    ref.read(googleSignInProvider.notifier);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     final authController = AuthController();
+    final signUpController = ref.read(signUpProvider.notifier);
+    final gooleSignUp = ref.read(googleSignInProvider.notifier);
     return Scaffold(
         body: SafeArea(
             child: Center(
@@ -120,15 +127,13 @@ class _SignUpState extends State<SignUp> {
                       ),
                     ),
                     // sign up button..........................................................................//
-                    // (authController.isLoading)
-                    //     ? const Center(child: CircularProgressIndicator())
-                    //     :
+                    
                     Padding(
                       padding: const EdgeInsets.only(left: 20, right: 20),
                       child: ElevatedButton(
                         onPressed: () {
                           if (_signKey.currentState!.validate()) {
-                            authController.signUp(
+                            signUpController.signUpWithEmailAndPassword(
                                 context: context,
                                 email: _emailController.text.trim(),
                                 password: _passwordController.text.trim());
@@ -174,7 +179,7 @@ class _SignUpState extends State<SignUp> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      authController.signInWithGoogle(context: context);
+                      gooleSignUp.signInWithGoogle();
                     },
                     child: SizedBox(
                         height: MediaQuery.sizeOf(context).height * 0.03,

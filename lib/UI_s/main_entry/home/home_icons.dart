@@ -1,21 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ocreative_land/auth_controls/controller/authentication_controller.dart';
 import 'package:ocreative_land/widgets/static_color.dart';
 
-class HomeIcons extends StatefulWidget {
+class HomeIcons extends ConsumerStatefulWidget {
   const HomeIcons({super.key});
 
   @override
-  State<HomeIcons> createState() => _HomeIconsState();
+  ConsumerState<HomeIcons> createState() => _HomeIconsState();
 }
 
-class _HomeIconsState extends State<HomeIcons> {
+
+class _HomeIconsState extends ConsumerState<HomeIcons> {
+    // instamt initialization //
   @override
-  Widget build(BuildContext context) {
+  void initState() {
+    ref.read(authProvider.notifier);
+    super.initState();
+  }
+  @override
+  Widget build(BuildContext context,) {
+    final logOut = ref.read(authProvider.notifier);
     return Row(
       children: [
         IconButton(
           color: appLightGreen,
-          onPressed: () {},
+          onPressed: () {
+            logOut.onSignOut();
+          },
           icon: Stack(
             alignment: AlignmentDirectional.topEnd,
             children: [
