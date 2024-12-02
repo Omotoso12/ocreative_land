@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:ocreative_land/auth_controls/forgot_password/forgot_password_controller.dart';
 import 'package:ocreative_land/widgets/string.dart';
-import '../../auth_controls/auth_controller.dart';
 import '../../widgets/form_widgets.dart';
 
-class ForgetPassord extends StatefulWidget {
+class ForgetPassord extends ConsumerStatefulWidget {
   const ForgetPassord({super.key});
 
   @override
-  State<ForgetPassord> createState() => _ForgetPassordState();
+  ConsumerState<ForgetPassord> createState() => _ForgetPassordState();
 }
 
-class _ForgetPassordState extends State<ForgetPassord> {
+class _ForgetPassordState extends ConsumerState<ForgetPassord> {
   /* variables needed
   formkey
   controllers
@@ -29,12 +30,13 @@ class _ForgetPassordState extends State<ForgetPassord> {
   // instamt initialization //
   @override
   void initState() {
+    ref.read(forgotPasswordProvider.notifier);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    final authController = AuthController();
+    final forgotPassController = ref.read(forgotPasswordProvider.notifier);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -80,14 +82,36 @@ class _ForgetPassordState extends State<ForgetPassord> {
                             }
                             return null; // Return null if validation
                           })),
-                  (authController.isLoading)
-                      ? const Center(child: CircularProgressIndicator())
+                  (ref.watch(forgotPasswordProvider).sent)
+                      ? Padding(
+                          padding: const EdgeInsets.only(left: 20, right: 20),
+                          child: ElevatedButton(
+                            onPressed: () {
+                             forgotPassController.goToLogin();
+                             Navigator.pop(context);
+                            },
+                            style: ElevatedButton.styleFrom(
+                                fixedSize:
+                                    Size(MediaQuery.sizeOf(context).width, 50),
+                                backgroundColor:
+                                    const Color.fromARGB(225, 89, 142, 81),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10))),
+                            child: const Text(
+                              'Go to Login',
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 13),
+                            ),
+                          ),
+                        )
                       : Padding(
                           padding: const EdgeInsets.only(left: 20, right: 20),
                           child: ElevatedButton(
                             onPressed: () {
                               if (_forgetKey.currentState!.validate()) {
-                                authController.forgetPassord(
+                                forgotPassController.forgotPassword(
                                     email: _emailController.text.trim(),
                                     context: context);
                               }
@@ -99,7 +123,9 @@ class _ForgetPassordState extends State<ForgetPassord> {
                                     const Color.fromARGB(225, 89, 142, 81),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10))),
-                            child: const Text(
+                            child: (ref.watch(forgotPasswordProvider).status)?
+                            const Center(child: CircularProgressIndicator())
+                            :const Text(
                               'Get link',
                               style: TextStyle(
                                   color: Colors.white,

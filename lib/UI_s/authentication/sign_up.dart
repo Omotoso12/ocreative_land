@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:ocreative_land/auth_controls/auth_controller.dart';
 import 'package:ocreative_land/widgets/string.dart';
 import 'package:ocreative_land/widgets/form_widgets.dart';
 
@@ -47,7 +46,6 @@ class _SignUpState extends ConsumerState<SignUp> {
 
   @override
   Widget build(BuildContext context) {
-    final authController = AuthController();
     final signUpController = ref.read(signUpProvider.notifier);
     final gooleSignUp = ref.read(googleSignInProvider.notifier);
     return Scaffold(
@@ -146,7 +144,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                                 const Color.fromARGB(225, 89, 142, 81),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10))),
-                        child: (!authController.isLoading)
+                        child: (!ref.watch(signUpProvider).status)
                             ? const Text(
                                 'Sign up',
                                 style: TextStyle(
@@ -179,7 +177,7 @@ class _SignUpState extends ConsumerState<SignUp> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      gooleSignUp.signInWithGoogle();
+                      gooleSignUp.signInWithGoogle(context);
                     },
                     child: SizedBox(
                         height: MediaQuery.sizeOf(context).height * 0.03,

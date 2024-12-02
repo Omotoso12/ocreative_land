@@ -5,6 +5,7 @@ import '../../../../repository/auth_repo_provider.dart';
 import 'package:authentication_repository/authentication_repository.dart';
 
 import '../../UI_s/elements/snack_pop.dart';
+import '../../UI_s/main_entry/buttom.dart';
 
 part 'signup_state.dart';
 
@@ -26,6 +27,10 @@ class SignUpController extends StateNotifier<SignUpState> {
       );
 
       state = state.copyWith(status: false);
+
+       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return const BottomNav();
+      }));
     } on SignUpWithEmailAndPasswordFailure catch (e) {
       state = state.copyWith(
           status: false, errorMessage: e.code);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:ocreative_land/auth_controls/controller/authentication_controller.dart';
+import 'package:ocreative_land/my_app.dart';
 import 'package:ocreative_land/widgets/static_color.dart';
 
 class HomeIcons extends ConsumerStatefulWidget {
@@ -26,8 +27,14 @@ class _HomeIconsState extends ConsumerState<HomeIcons> {
         IconButton(
           color: appLightGreen,
           onPressed: () {
-            logOut.onSignOut();
+            setState(() {
+              logOut.onSignOut();
+              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+                return const MyApp();
+              }));
+            });
           },
+            
           icon: Stack(
             alignment: AlignmentDirectional.topEnd,
             children: [
